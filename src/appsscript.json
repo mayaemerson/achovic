@@ -1,0 +1,22 @@
+{
+  "timeZone": "America/New_York",
+  "dependencies": {
+  },
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "V8",
+  "sheets": {
+    "macros": [{
+      "menuName": "testinclud",
+      "functionName": "testinclud"
+    }, {
+      "menuName": "renomearid",
+      "functionName": "renomearid"
+    }, {
+      "menuName": "idrenomear",
+      "functionName": "idrenomear"
+    }, {
+      "menuName": "inserir inhaabaixo",
+      "functionName": "inseririnhaabaixo"
+    }]
+  }
+}

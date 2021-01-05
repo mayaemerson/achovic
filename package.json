@@ -1,0 +1,22 @@
+{
+  "name": "acosvic",
+  "version": "1.0.0",
+  "description": "Ajuda plan",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mayaemerson/achovic.git"
+  },
+  "author": "Emerson Maia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mayaemerson/achovic/issues"
+  },
+  "homepage": "https://github.com/mayaemerson/achovic#readme",
+  "dependencies": {
+    "@types/google-apps-script": "^1.0.20"
+  }
+}
