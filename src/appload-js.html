@@ -19,17 +19,18 @@ function LoadView(options){
            function search() {
              var searchInput = document.getElementById("searchInput").value;
              var resultsArray = data.filter(function(r) {
-                return r[1].indexOf(searchInput) !== -1;
+                return r[1].toString().toLowerCase().indexOf(searchInput.toString().toLowerCase()) !== -1;
              });
 
              var searchResultsBox = document.getElementById("searchResults");
              var templateBox = document.getElementById("rowTemplate");
              var template = templateBox.content;
+             searchResultsBox.innerHTML = "";
              resultsArray.forEach(function(r) {
-                  var row = template.cloneNode(true);
-                  var CustIDColumn = row.querySelector(".custID");
-                  var datatable = row.querySelector(".dttable");
-                  var passetable = row.querySelector(".dtpasse");
+                  var tr = template.cloneNode(true);
+                  var CustIDColumn = tr.querySelector(".custID");
+                  var datatable = tr.querySelector(".dttable");
+                  var passetable = tr.querySelector(".dtpasse");
                   CustIDColumn.textContent = r[0];
                   datatable.textContent = r[1];
                   passetable.textContent = r[2];
@@ -38,20 +39,23 @@ function LoadView(options){
            }
 
         function loadSearchview(){
-        LoadView({func: "loadSearchView", callback: setDataforSearch})
+        LoadView({func: "loadSearchView", callback: setDataforSearch});
         }
         function loadpasse(){
-        LoadView({func: "loadPasseView"})
+        LoadView({func: "loadPasseView"});
         }
         function loaddashboard(){
-        LoadView({func: "loadDashboardView"})
+        LoadView({func: "loadDashboardView"});
         }
-
-
+        function inputEventHandler(e){
+           if(e.target.matches("#searchInput")){
+                search();
+           }
+        }
+  
 
     document.getElementById("search-link").addEventListener("click", loadSearchview);
     document.getElementById("dashboard-link").addEventListener("click", loaddashboard);
     document.getElementById("passe-link").addEventListener("click", loadpasse);
-
-    document.getElementById("searchInput").addEventListener("input", search);
+    document.getElementById("app").addEventListener("input", inputEventHandler);
 </script>
