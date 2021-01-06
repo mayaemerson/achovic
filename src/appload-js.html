@@ -1,9 +1,6 @@
 <script>
-//  document.addEventListener('DOMContentLoaded', function () {
-   
-//     document.getElementById("search-link").addEventListener("click", loadSearch);
-    
-//    });
+
+var data;
 
 function LoadView(options){
           var id = typeof options.id === "undefined" ? "app" : options.id;
@@ -13,8 +10,35 @@ function LoadView(options){
           typeof options.params == "undefined" ? cb() : cb(options.params);
           })[options.func]();
         }
-        function seacrchhm(){
-        LoadView({func: "loadSearchView"})
+
+         function setDataforSearch() {
+           google.script.run.withSuccessHandler(function(dataReturned){
+              data = dataReturned.slice();
+           }).getDataForSearch();
+         }
+           function search() {
+             var searchInput = document.getElementById("searchInput").value;
+             var resultsArray = data.filter(function(r) {
+                return r[1].indexOf(searchInput) !== -1;
+             });
+
+             var searchResultsBox = document.getElementById("searchResults");
+             var templateBox = document.getElementById("rowTemplate");
+             var template = templateBox.content;
+             resultsArray.forEach(function(r) {
+                  var row = template.cloneNode(true);
+                  var CustIDColumn = row.querySelector(".custID");
+                  var datatable = row.querySelector(".dttable");
+                  var passetable = row.querySelector(".dtpasse");
+                  CustIDColumn.textContent = r[0];
+                  datatable.textContent = r[1];
+                  passetable.textContent = r[2];
+                  searchResultsBox.appendChild[tr];
+             });
+           }
+
+        function loadSearchview(){
+        LoadView({func: "loadSearchView", callback: setDataforSearch})
         }
         function loadpasse(){
         LoadView({func: "loadPasseView"})
@@ -23,13 +47,11 @@ function LoadView(options){
         LoadView({func: "loadDashboardView"})
         }
 
-  // function loadSearch(){
-  //    google.script.run.withSuccessHandler(function(html){
-  //     document.getElementById("app").innerHTML = html;
-  //    }).loadSearchView;
-  // }
 
-  document.getElementById("search-link").addEventListener("click", seacrchhm);
-   document.getElementById("dashboard-link").addEventListener("click", loaddashboard);
+
+    document.getElementById("search-link").addEventListener("click", loadSearchview);
+    document.getElementById("dashboard-link").addEventListener("click", loaddashboard);
     document.getElementById("passe-link").addEventListener("click", loadpasse);
+
+    document.getElementById("searchInput").addEventListener("input", search);
 </script>
